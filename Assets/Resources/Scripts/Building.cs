@@ -2,6 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ * 
+ * Instantiated by BuildingPlacer.cs 
+ * 
+ * Contains data and methods about a building
+ */
+
 public enum BuildingPlacement
 {
     VALID,

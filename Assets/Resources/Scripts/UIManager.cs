@@ -4,6 +4,13 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+/*
+ * 
+ * GameObject: GAME
+ * 
+ * Manages and updates UI elements.
+ */
+
 public class UIManager : MonoBehaviour
 {
     private BuildingPlacer _buildingPlacer;

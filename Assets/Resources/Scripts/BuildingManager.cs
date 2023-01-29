@@ -2,6 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ * 
+ * GameObject: Any Building
+ * 
+ * Manages the placement of a building 
+ */
+
 [RequireComponent(typeof(BoxCollider))]
 public class BuildingManager : UnitManager
 {
@@ -76,6 +83,11 @@ public class BuildingManager : UnitManager
             }
         }
         return invalidCornersCount < 3;
+    }
+
+    protected override bool IsActive()
+    {
+        return _building.IsFixed;
     }
 
 }

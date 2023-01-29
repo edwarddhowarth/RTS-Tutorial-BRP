@@ -2,6 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ * 
+ * GameObject: GAME
+ * 
+ * Used for placing buildings into the play area
+ */
 public class BuildingPlacer : MonoBehaviour
 {
     private Building _placedBuilding = null;
@@ -37,7 +43,7 @@ public class BuildingPlacer : MonoBehaviour
                 _lastPlacementPosition = _raycastHit.point;
             }
 
-            if (_placedBuilding.HasValidPlacement && Input.GetMouseButtonDown(0))
+            if (_placedBuilding.HasValidPlacement && Input.GetMouseButtonUp(0))
             {
                 _PlaceBuilding();
             }
