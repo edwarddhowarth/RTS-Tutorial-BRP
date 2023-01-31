@@ -172,6 +172,8 @@ MonoBehaviour:
   buildingButtonPrefab: {fileID: 4407137015081082284, guid: 5896ad637f4204649aef7723e7c6184f, type: 3}
   resourcesUIParent: {fileID: 1566803839}
   gameResourceDisplayPrefab: {fileID: 396160590426772360, guid: 4a94b175303727646ada4897e6e50f4b, type: 3}
+  infoPanel: {fileID: 1767517690}
+  gameResourceCostPrefab: {fileID: 396160590426772360, guid: c002384c977738e44b08094e7cc1016e, type: 3}
 --- !u!114 &176024855
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -554,6 +556,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 383200678313729849, guid: eaffcf5b76aae7847ab98fd1ef1683bc, type: 3}
+      propertyPath: m_Color.a
+      value: 0.53333336
+      objectReference: {fileID: 0}
     - target: {fileID: 4047422398753159198, guid: eaffcf5b76aae7847ab98fd1ef1683bc, type: 3}
       propertyPath: m_RaycastTarget
       value: 0
@@ -668,6 +674,11 @@ RectTransform:
 --- !u!224 &1571718802 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4047422398753159199, guid: eaffcf5b76aae7847ab98fd1ef1683bc, type: 3}
+  m_PrefabInstance: {fileID: 1566803838}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1767517690 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7301425271989791185, guid: eaffcf5b76aae7847ab98fd1ef1683bc, type: 3}
   m_PrefabInstance: {fileID: 1566803838}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1887223108

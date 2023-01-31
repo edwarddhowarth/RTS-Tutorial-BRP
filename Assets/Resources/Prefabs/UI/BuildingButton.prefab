@@ -147,6 +147,7 @@ GameObject:
   - component: {fileID: 4407137015081082272}
   - component: {fileID: 4407137015081082287}
   - component: {fileID: 4407137015081082286}
+  - component: {fileID: 3435665372948434904}
   m_Layer: 5
   m_Name: BuildingButton
   m_TagString: Untagged
@@ -257,3 +258,15 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &3435665372948434904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4407137015081082284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1be134c0a2d56d846bcaad0b72c5d753, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -63,7 +63,6 @@ public class UnitsSelection : MonoBehaviour
         bool inBounds;
         foreach(GameObject unit in selectableUnits)
         {
-            Debug.Log(unit.name + " " + unit.tag);
             inBounds = selectionBounds.Contains(
                 Camera.main.WorldToViewportPoint(unit.transform.position)
                 );

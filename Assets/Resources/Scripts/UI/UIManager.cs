@@ -22,6 +22,12 @@ public class UIManager : MonoBehaviour
     public Transform resourcesUIParent;
     public GameObject gameResourceDisplayPrefab;
 
+    public GameObject infoPanel;
+    public GameObject gameResourceCostPrefab;
+    private TextMeshProUGUI _infoPanelTitleText;
+    private TextMeshProUGUI _infoPanelDescriptionText;
+    private Transform _infoPanelResourcesCostParent;
+
     private void Awake()
     {
         _buildingPlacer = GetComponent<BuildingPlacer>();
@@ -35,6 +41,7 @@ public class UIManager : MonoBehaviour
             _SetResourceText(pair.Key, pair.Value.Amount);
         }
 
+        //Create building buttons on UI for each type
         _buildingButtons = new Dictionary<string, Button>();
         for (int i = 0; i < Globals.BUILDING_DATA.Length; i++)
         {
@@ -49,10 +56,17 @@ public class UIManager : MonoBehaviour
             {
                 b.interactable = false;
             }
-
+            button.GetComponent<BuildingButton>().Initialize(Globals.BUILDING_DATA[i]);
 
         }
 
+        //Building Info Panel
+        Transform infoPanelTransform = infoPanel.transform;
+        _infoPanelTitleText = infoPanelTransform.Find("Content/Title").GetComponent<TextMeshProUGUI>();
+        _infoPanelDescriptionText = infoPanelTransform.Find("Content/Description").GetComponent<TextMeshProUGUI>();
+        _infoPanelResourcesCostParent = infoPanelTransform.Find("Content/ResourcesCost");
+        Debug.Log(_infoPanelResourcesCostParent);
+        ShowInfoPanel(false);
     }
 
     private void _AddBuildingButtonListener(Button b, int i)
@@ -86,12 +100,20 @@ public class UIManager : MonoBehaviour
     {
         EventManager.AddListener("UpdateResourceTexts", _OnUpdateResourceTexts);
         EventManager.AddListener("CheckBuildingButtons", _OnCheckBuildingButtons);
+
+        //Info Panels
+        EventManager.AddTypedListener("HoverBuildingButton", _OnHoverBuildingButton);
+        EventManager.AddListener("UnhoverBuildingButton", _OnUnhoverBuildingButton);
     }
 
     private void OnDisable()
     {
         EventManager.RemoveListener("UpdateResourceTexts", _OnUpdateResourceTexts);
         EventManager.RemoveListener("CheckBuildingButtons", _OnCheckBuildingButtons);
+
+        //Info Panels
+        EventManager.RemoveTypedListener("HoverBuildingButton", _OnHoverBuildingButton);
+        EventManager.RemoveListener("UnhoverBuildingButton", _OnUnhoverBuildingButton);
     }
 
     private void _OnUpdateResourceTexts()
@@ -104,6 +126,53 @@ public class UIManager : MonoBehaviour
     {
         foreach (BuildingData data in Globals.BUILDING_DATA)
             _buildingButtons[data.code].interactable = data.CanBuy();
+    }
+
+    //Info Panel
+    private void _OnHoverBuildingButton(CustomEventData data)
+    {
+        SetInfoPanel(data.buildingData);
+        ShowInfoPanel(true);
+    }
+
+    private void _OnUnhoverBuildingButton()
+    {
+        ShowInfoPanel(false);
+    }
+
+    public void SetInfoPanel(BuildingData data)
+    {
+        //update text
+        if(data.code != "")
+        {
+            _infoPanelTitleText.text = data.code;
+        }
+        if(data.description != "")
+        {
+            _infoPanelDescriptionText.text = data.description;
+        }
+
+        //clear resource costs and reinstantiate new ones
+        foreach (Transform child in _infoPanelResourcesCostParent)
+            Destroy(child.gameObject);
+
+        if(data.cost.Count > 0)
+        {
+            GameObject g;
+            Transform t;
+            foreach(ResourceValue resource in data.cost)
+            {
+                g = GameObject.Instantiate(gameResourceCostPrefab, _infoPanelResourcesCostParent);
+                t = g.transform;
+                t.Find("Text").GetComponent<TextMeshProUGUI>().text = resource.amount.ToString();
+                t.Find("Icon").GetComponent<Image>().sprite = Resources.Load<Sprite>($"Textures/GameResources/{resource.code}");
+            }
+        }
+    }
+
+    public void ShowInfoPanel(bool show)
+    {
+        infoPanel.SetActive(show);
     }
 
 }
