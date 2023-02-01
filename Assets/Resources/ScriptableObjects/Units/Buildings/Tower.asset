@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea575bb2b0b4dc1449be04f4e3f3ecb7, type: 3}
+  m_Name: Tower
+  m_EditorClassIdentifier: 
+  code: tower
+  unitName: Tower
+  description: A great place for a lookout!
+  healthpoints: 250
+  prefab: {fileID: 3257128061885811435, guid: c13cb0cabcb96a34ca49c77aabfad2e7, type: 3}
+  cost:
+  - code: stone
+    amount: 50
+  - code: wood
+    amount: 200

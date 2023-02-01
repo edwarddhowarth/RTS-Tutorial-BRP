@@ -22,8 +22,10 @@ public class UIManager : MonoBehaviour
     public Transform resourcesUIParent;
     public GameObject gameResourceDisplayPrefab;
 
+
     public GameObject infoPanel;
     public GameObject gameResourceCostPrefab;
+    public Color invalidTextColor;
     private TextMeshProUGUI _infoPanelTitleText;
     private TextMeshProUGUI _infoPanelDescriptionText;
     private Transform _infoPanelResourcesCostParent;
@@ -38,6 +40,8 @@ public class UIManager : MonoBehaviour
             GameObject display = Instantiate(gameResourceDisplayPrefab, resourcesUIParent);
             display.name = pair.Key;
             _resourceTexts[pair.Key] = display.transform.Find("Text").GetComponent<TextMeshProUGUI>();
+            display.transform.Find("Icon").GetComponent<Image>().sprite = Resources.Load<Sprite>($"Textures/GameResources/{pair.Key}");
+            Debug.Log(display.transform.Find("Icon").GetComponent<Image>().sprite);
             _SetResourceText(pair.Key, pair.Value.Amount);
         }
 
@@ -65,7 +69,6 @@ public class UIManager : MonoBehaviour
         _infoPanelTitleText = infoPanelTransform.Find("Content/Title").GetComponent<TextMeshProUGUI>();
         _infoPanelDescriptionText = infoPanelTransform.Find("Content/Description").GetComponent<TextMeshProUGUI>();
         _infoPanelResourcesCostParent = infoPanelTransform.Find("Content/ResourcesCost");
-        Debug.Log(_infoPanelResourcesCostParent);
         ShowInfoPanel(false);
     }
 
@@ -145,7 +148,7 @@ public class UIManager : MonoBehaviour
         //update text
         if(data.code != "")
         {
-            _infoPanelTitleText.text = data.code;
+            _infoPanelTitleText.text = data.unitName;
         }
         if(data.description != "")
         {
@@ -166,6 +169,12 @@ public class UIManager : MonoBehaviour
                 t = g.transform;
                 t.Find("Text").GetComponent<TextMeshProUGUI>().text = resource.amount.ToString();
                 t.Find("Icon").GetComponent<Image>().sprite = Resources.Load<Sprite>($"Textures/GameResources/{resource.code}");
+
+                //Check resource requirement and set correct text color
+                if(Globals.GAME_RESOURCES[resource.code].Amount < resource.amount)
+                {
+                    t.Find("Text").GetComponent<TextMeshProUGUI>().color = invalidTextColor;
+                }
             }
         }
     }
