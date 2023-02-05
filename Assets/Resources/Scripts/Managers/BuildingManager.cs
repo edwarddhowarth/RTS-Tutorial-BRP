@@ -7,14 +7,21 @@ using UnityEngine;
  * GameObject: Any Building
  * 
  * Manages the placement of a building 
+ * Inherits UnitManager's selection elements
  */
 
 [RequireComponent(typeof(BoxCollider))]
 public class BuildingManager : UnitManager
 {
+    
+    private Building _building;
+    protected override Unit Unit
+    {
+        get { return _building; }
+        set {_building =  value is Building ? (Building)value : null; }
+    }
+    
     private BoxCollider _collider;
-
-    private Building _building = null;
     private int _nCollisions = 0;
 
     public void Initialize(Building building)

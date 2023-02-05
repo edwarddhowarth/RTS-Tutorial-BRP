@@ -10,11 +10,15 @@ using UnityEngine;
 
 public class UnitsSelection : MonoBehaviour
 {
+    public UIManager uiManager;
     private bool _isDraggingMouseBox = false;
     private Vector3 _dragStartPosition;
 
     Ray _ray;
     RaycastHit _raycastHit;
+    
+    //Control Groups
+    private Dictionary<int, List<UnitManager>> _selectionGroups = new Dictionary<int, List<UnitManager>>();
 
     private void Update()
     {
@@ -50,6 +54,29 @@ public class UnitsSelection : MonoBehaviour
                 }
             }
         }
+        
+        //Control Group selection/creation
+        // if (Input.anyKeyDown)
+        // {
+        //     int alphaKey = Utils.GetAlphaKeyValue(Input.inputString);
+        //     Debug.Log("alphaKey: " + alphaKey);
+        //     if (alphaKey != -1)
+        //     {
+        //         if (
+        //             Input.GetKey(KeyCode.LeftControl) ||
+        //             Input.GetKey(KeyCode.RightControl) ||
+        //             Input.GetKey(KeyCode.LeftApple) ||
+        //             Input.GetKey(KeyCode.RightControl)
+        //         )
+        //         {
+        //             CreateSelectionGroup(alphaKey);
+        //         }
+        //         else
+        //         {
+        //             _ReselectGroup(alphaKey);
+        //         }
+        //     }
+        // }
     }
 
     private void _SelectUnitsInDraggingBox()
@@ -89,4 +116,47 @@ public class UnitsSelection : MonoBehaviour
         foreach (UnitManager um in selectedUnits)
             um.Deselect();
     }
+    
+    //Selection Group
+
+    public void SelectUnitsGroup(int groupIndex)
+    {
+        _ReselectGroup(groupIndex);
+    }
+
+    public void CreateSelectionGroup(int groupIndex)
+    {
+        //User clearing a control group by assign a group with no units selected
+        if (Globals.SELECTED_UNITS.Count == 0)
+        {
+            //Reset group to empty
+            if (_selectionGroups.ContainsKey(groupIndex))
+                _RemoveSelectionGroup(groupIndex);
+            return;
+        }
+
+        //Add selected units to control group
+        List<UnitManager> groupUnits = new List<UnitManager>(Globals.SELECTED_UNITS);
+        _selectionGroups[groupIndex] = groupUnits;
+        
+        uiManager.ToggleSelectionGroupButton(groupIndex, true);
+    }
+
+    private void _RemoveSelectionGroup(int groupIndex)
+    {
+        _selectionGroups.Remove(groupIndex);
+        uiManager.ToggleSelectionGroupButton(groupIndex, false);
+    }
+
+    private void _ReselectGroup(int groupIndex)
+    {
+        //Selected group doesnt exist so do nothing
+        if (!_selectionGroups.ContainsKey(groupIndex)) return;
+        
+        _DeselectAllUnits();
+        foreach(UnitManager um in _selectionGroups[groupIndex])
+            um.Select();
+    }
+    
+    
 }

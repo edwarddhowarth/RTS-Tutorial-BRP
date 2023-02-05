@@ -2,12 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ * GameObject: Any Unit
+ * 
+ * Handles the player interaction elements of units
+ */
+
+[RequireComponent(typeof(BoxCollider))]
 public class UnitManager : MonoBehaviour
 {
     public GameObject selectionCircle;
 
     private Transform _canvas;
     private GameObject _healthbar;
+    protected BoxCollider _collider;
+    protected virtual Unit Unit { get; set; }
 
     private void Awake()
     {
@@ -45,6 +54,7 @@ public class UnitManager : MonoBehaviour
         selectionCircle.SetActive(false);
         Destroy(_healthbar);
         _healthbar = null;
+        EventManager.TriggerTypedEvent("DeselectUnit", new CustomEventData(Unit));
     }
 
     private void OnMouseDown()
@@ -72,11 +82,18 @@ public class UnitManager : MonoBehaviour
             h.Initialize(transform, boundingBox.height);
             h.SetPosition();
         }
+        EventManager.TriggerTypedEvent("SelectUnit", new CustomEventData(Unit));
     }
 
     protected virtual bool IsActive()
     {
         return true;
+    }
+
+    public void Initialize(Unit unit)
+    {
+        _collider = GetComponent<BoxCollider>();
+        Unit = unit;
     }
 
     

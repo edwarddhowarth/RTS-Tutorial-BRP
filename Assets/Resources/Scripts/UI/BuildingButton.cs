@@ -3,6 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+/*
+ * 
+ * GameObject: UI Building Buttons
+ * 
+ * Provides visual feedback on UI building button elements
+ */
+
 public class BuildingButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     private BuildingData _buildingData;
