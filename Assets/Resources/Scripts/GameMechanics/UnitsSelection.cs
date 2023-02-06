@@ -1,11 +1,16 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.EventSystems;
+
 
 /*
  * 
  * GameObject: GAME
- * 
+ *
+ * Handles mouse selection and command groups
  */
 
 public class UnitsSelection : MonoBehaviour
@@ -14,24 +19,37 @@ public class UnitsSelection : MonoBehaviour
     private bool _isDraggingMouseBox = false;
     private Vector3 _dragStartPosition;
 
+    private bool _cursorOverUI;
     Ray _ray;
     RaycastHit _raycastHit;
     
     //Control Groups
     private Dictionary<int, List<UnitManager>> _selectionGroups = new Dictionary<int, List<UnitManager>>();
-
+    
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        MouseSelectionUpdate();
+    }
+
+    //Only gets called once on first Down Click and once when released
+    //Will only work if cursor isnt over a UI element
+    public void OnMouse1Down(InputAction.CallbackContext context)
+    {
+        if (context.performed && _cursorOverUI)
         {
             _isDraggingMouseBox = true;
             _dragStartPosition = Input.mousePosition;
         }
-
-        if (Input.GetMouseButtonUp(0))
+        else
         {
             _isDraggingMouseBox = false;
         }
+        
+    }
+
+    private void MouseSelectionUpdate()
+    {
+        _cursorOverUI = !EventSystem.current.IsPointerOverGameObject();
 
         if (_isDraggingMouseBox && _dragStartPosition != Input.mousePosition)
             _SelectUnitsInDraggingBox();
@@ -44,40 +62,20 @@ public class UnitsSelection : MonoBehaviour
             {
                 _ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 if(Physics.Raycast(
-                    _ray,
-                    out _raycastHit,
-                    1000f
-                    ))
+                       _ray,
+                       out _raycastHit,
+                       1000f
+                   ))
                 {
                     if (_raycastHit.transform.tag == "Terrain")
                         _DeselectAllUnits();
                 }
             }
         }
+            
         
-        //Control Group selection/creation
-        // if (Input.anyKeyDown)
-        // {
-        //     int alphaKey = Utils.GetAlphaKeyValue(Input.inputString);
-        //     Debug.Log("alphaKey: " + alphaKey);
-        //     if (alphaKey != -1)
-        //     {
-        //         if (
-        //             Input.GetKey(KeyCode.LeftControl) ||
-        //             Input.GetKey(KeyCode.RightControl) ||
-        //             Input.GetKey(KeyCode.LeftApple) ||
-        //             Input.GetKey(KeyCode.RightControl)
-        //         )
-        //         {
-        //             CreateSelectionGroup(alphaKey);
-        //         }
-        //         else
-        //         {
-        //             _ReselectGroup(alphaKey);
-        //         }
-        //     }
-        // }
     }
+
 
     private void _SelectUnitsInDraggingBox()
     {
@@ -88,6 +86,8 @@ public class UnitsSelection : MonoBehaviour
             );
         GameObject[] selectableUnits = GameObject.FindGameObjectsWithTag("Unit");
         bool inBounds;
+        
+        //For all units owned by the player, check if they are in the selection box
         foreach(GameObject unit in selectableUnits)
         {
             inBounds = selectionBounds.Contains(
@@ -96,7 +96,12 @@ public class UnitsSelection : MonoBehaviour
             if (inBounds)
                 unit.GetComponent<UnitManager>().Select();
             else
-                unit.GetComponent<UnitManager>().Deselect();
+            {
+                //Only remove unit from global selected units list if it exists in there first
+                if(Globals.SELECTED_UNITS.Contains(unit.GetComponent<UnitManager>()))
+                    unit.GetComponent<UnitManager>().Deselect();
+            }
+                
         }
     }
 

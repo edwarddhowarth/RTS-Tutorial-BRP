@@ -138,6 +138,7 @@ GameObject:
   - component: {fileID: 176024857}
   - component: {fileID: 176024858}
   - component: {fileID: 176024859}
+  - component: {fileID: 176024860}
   m_Layer: 0
   m_Name: GAME
   m_TagString: Untagged
@@ -219,6 +220,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiManager: {fileID: 176024854}
+  _playerInput: {fileID: 176024859}
 --- !u!114 &176024858
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -270,8 +272,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: 34e6cc17-578d-4885-b56b-ed8dbdfbe3bb
-    m_ActionName: Player/ControlGroupCreate[/Keyboard/leftCtrl,/Keyboard/1,/Keyboard/2,/Keyboard/3,/Keyboard/4,/Keyboard/5,/Keyboard/6,/Keyboard/7,/Keyboard/8]
+    m_ActionId: 14c6bc7e-2580-4dff-82b9-e5605e990996
+    m_ActionName: ControlGroups/ControlGroupCreate1[/Keyboard/leftCtrl,/Keyboard/1]
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 176024857}
@@ -286,8 +288,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: 94031fa3-f367-45ee-bcd0-b060f35910e3
-    m_ActionName: Player/ControlGroupCreate2[/Keyboard/leftCtrl,/Keyboard/2]
+    m_ActionId: 230d6958-a6f0-4c45-a82f-307ac461b647
+    m_ActionName: ControlGroups/ControlGroupCreate2[/Keyboard/leftCtrl,/Keyboard/2]
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 176024857}
@@ -302,8 +304,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: 4a09f352-4e20-4cda-bf0b-926519c9be9e
-    m_ActionName: Player/ControlGroupCreate3[/Keyboard/leftCtrl,/Keyboard/3]
+    m_ActionId: 1c58dbe9-b0a4-4699-b62c-746f73d3dfc4
+    m_ActionName: ControlGroups/ControlGroupCreate3[/Keyboard/leftCtrl,/Keyboard/3]
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 176024857}
@@ -318,8 +320,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: 1c2e1391-d8c0-4e72-aede-0b67654fce35
-    m_ActionName: Player/ControlGroupCreate4[/Keyboard/leftCtrl,/Keyboard/4]
+    m_ActionId: 2e66bfc0-bbd4-4833-afde-96e484366b13
+    m_ActionName: ControlGroups/ControlGroupCreate4[/Keyboard/leftCtrl,/Keyboard/4]
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 176024857}
@@ -334,8 +336,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: d179aa29-0da6-4130-9fc8-cd1fee533455
-    m_ActionName: Player/ControlGroupCreate5[/Keyboard/leftCtrl,/Keyboard/5]
+    m_ActionId: d12cc204-88ed-470f-b78f-0b5e26dab674
+    m_ActionName: ControlGroups/ControlGroupCreate5[/Keyboard/leftCtrl,/Keyboard/5]
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 176024857}
@@ -350,8 +352,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: add222fd-4a35-4cc9-b930-d95f105eef24
-    m_ActionName: Player/ControlGroupCreate6[/Keyboard/leftCtrl,/Keyboard/6]
+    m_ActionId: 35cfebff-a9de-44c9-8610-55cd78950dd0
+    m_ActionName: ControlGroups/ControlGroupCreate6[/Keyboard/leftCtrl,/Keyboard/6]
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 176024857}
@@ -366,8 +368,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: dc20990e-94ea-456c-b2d4-6a08b5f16c7e
-    m_ActionName: Player/ControlGroupCreate7[/Keyboard/leftCtrl,/Keyboard/7]
+    m_ActionId: 5f1f9e1b-7332-400c-b4b6-5edb9ff4ba47
+    m_ActionName: ControlGroups/ControlGroupCreate7[/Keyboard/leftCtrl,/Keyboard/7]
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 176024857}
@@ -382,8 +384,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: 8fdee846-ab87-4311-89a0-174c3d69106f
-    m_ActionName: Player/ControlGroupCreate8[/Keyboard/leftCtrl,/Keyboard/8]
+    m_ActionId: aefa1126-0f1c-403d-96e1-7b66e44e31a9
+    m_ActionName: ControlGroups/ControlGroupCreate8[/Keyboard/leftCtrl,/Keyboard/8]
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 176024857}
@@ -398,8 +400,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: 48adc9a0-d500-478a-ab6a-b12cee19b508
-    m_ActionName: Player/ControlGroupCreate9[/Keyboard/leftCtrl,/Keyboard/9]
+    m_ActionId: 2893de1f-316b-409b-b0a7-35bf20c5a22e
+    m_ActionName: ControlGroups/ControlGroupCreate9[/Keyboard/leftCtrl,/Keyboard/9]
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 176024857}
@@ -414,8 +416,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: 1726041e-e34d-460c-b4ee-6ad9efde491d
-    m_ActionName: Player/ControlGroupSelect1[/Keyboard/1]
+    m_ActionId: e45450f6-3a57-4d47-89d2-b7857e4c586a
+    m_ActionName: ControlGroups/ControlGroupSelect1[/Keyboard/1]
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 176024857}
@@ -430,8 +432,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: 23178e94-baf0-441c-b065-5e41fae0298a
-    m_ActionName: Player/ControlGroupSelect2[/Keyboard/2]
+    m_ActionId: d6576d90-3a97-48e9-a485-6e739082eb57
+    m_ActionName: ControlGroups/ControlGroupSelect2[/Keyboard/2]
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 176024857}
@@ -446,8 +448,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: beb4bdbd-6ea4-4396-8e5d-bd2917acdf10
-    m_ActionName: Player/ControlGroupSelect3[/Keyboard/3]
+    m_ActionId: cfde03fc-92a1-4c01-81e3-f070d4d213ca
+    m_ActionName: ControlGroups/ControlGroupSelect3[/Keyboard/3]
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 176024857}
@@ -462,8 +464,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: 09bd9522-2f38-44d4-afce-c41223e0a06c
-    m_ActionName: Player/ControlGroupSelect4[/Keyboard/4]
+    m_ActionId: 359c2236-53a5-40ff-8ebf-99cbe919bd03
+    m_ActionName: ControlGroups/ControlGroupSelect4[/Keyboard/4]
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 176024857}
@@ -478,8 +480,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: 5eb416c4-2c06-4afc-93c4-7692bb8e5721
-    m_ActionName: Player/ControlGroupSelect5[/Keyboard/5]
+    m_ActionId: 5d9232d1-5d21-41fd-8765-70f0de5962da
+    m_ActionName: ControlGroups/ControlGroupSelect5[/Keyboard/5]
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 176024857}
@@ -494,8 +496,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: cf3bc7d6-60fc-429a-b232-cdae8c255653
-    m_ActionName: Player/ControlGroupSelect6[/Keyboard/6]
+    m_ActionId: 07f89147-2ba0-42d0-81b9-15f545ae282e
+    m_ActionName: ControlGroups/ControlGroupSelect6[/Keyboard/6]
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 176024857}
@@ -510,8 +512,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: ac782738-cbb2-4f60-b7a1-4231abd3b463
-    m_ActionName: Player/ControlGroupSelect7[/Keyboard/7]
+    m_ActionId: 9f583a6c-5dec-4961-bce4-52a20d61f793
+    m_ActionName: ControlGroups/ControlGroupSelect7[/Keyboard/7]
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 176024857}
@@ -526,8 +528,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: 83f7c393-e976-4a86-be52-7c1185563847
-    m_ActionName: Player/ControlGroupSelect8[/Keyboard/8]
+    m_ActionId: 1ee99e6d-806a-471c-b3cb-91bb380be04a
+    m_ActionName: ControlGroups/ControlGroupSelect8[/Keyboard/8]
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 176024857}
@@ -542,13 +544,42 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: 92a74e95-a014-4e86-a895-4fb8bd74e6b1
-    m_ActionName: Player/ControlGroupSelect9[/Keyboard/9]
+    m_ActionId: 144ea797-cc9e-4493-869b-5c29a70729a8
+    m_ActionName: ControlGroups/ControlGroupSelect9[/Keyboard/9]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 176024857}
+        m_TargetAssemblyTypeName: UnitsSelection, Assembly-CSharp
+        m_MethodName: OnMouse1Down
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: fa94fe6d-a763-4221-9a83-9b0302b52d75
+    m_ActionName: UnitSelection/MouseSelectionBox[/Mouse/leftButton]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: Player
+  m_DefaultActionMap: ControlGroups
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &176024860
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 176024852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 395c601daaee03d49a3924db316b6294, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerInput: {fileID: 176024859}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -719,14 +750,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.3214394, y: 0, z: 0, w: 0.94693017}
-  m_LocalPosition: {x: 0, y: 18, z: -11}
+  m_LocalRotation: {x: 0.38268343, y: 0, z: 0, w: 0.92387956}
+  m_LocalPosition: {x: 0, y: 32, z: -16}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 37.5, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 45, y: 0, z: 0}
 --- !u!1 &1103337770
 GameObject:
   m_ObjectHideFlags: 0
@@ -815,7 +846,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1497885363}
   - component: {fileID: 1497885362}
-  - component: {fileID: 1497885361}
+  - component: {fileID: 1497885364}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -823,26 +854,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1497885361
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1497885360}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SendPointerHoverToParent: 1
-  m_HorizontalAxis: Horizontal
-  m_VerticalAxis: Vertical
-  m_SubmitButton: Submit
-  m_CancelButton: Cancel
-  m_InputActionsPerSecond: 10
-  m_RepeatDelay: 0.5
-  m_ForceModuleActive: 0
 --- !u!114 &1497885362
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -873,6 +884,36 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1497885364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1497885360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01614664b831546d2ae94a42149d80ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SendPointerHoverToParent: 1
+  m_MoveRepeatDelay: 0.5
+  m_MoveRepeatRate: 0.1
+  m_XRTrackingOrigin: {fileID: 0}
+  m_ActionsAsset: {fileID: -944628639613478452, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_PointAction: {fileID: -1654692200621890270, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_MoveAction: {fileID: -8784545083839296357, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_SubmitAction: {fileID: 392368643174621059, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_CancelAction: {fileID: 7727032971491509709, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_LeftClickAction: {fileID: 3001919216989983466, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_MiddleClickAction: {fileID: -2185481485913320682, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_RightClickAction: {fileID: -4090225696740746782, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_ScrollWheelAction: {fileID: 6240969308177333660, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_TrackedDevicePositionAction: {fileID: 6564999863303420839, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_TrackedDeviceOrientationAction: {fileID: 7970375526676320489, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_DeselectOnBackgroundClick: 1
+  m_PointerBehavior: 0
+  m_CursorLockBehavior: 0
 --- !u!1001 &1566803838
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1060,9 +1101,13 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 4047422398753159184, guid: eaffcf5b76aae7847ab98fd1ef1683bc, type: 3}
+      propertyPath: m_TagString
+      value: UI
+      objectReference: {fileID: 0}
     - target: {fileID: 4047422398753159198, guid: eaffcf5b76aae7847ab98fd1ef1683bc, type: 3}
       propertyPath: m_RaycastTarget
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4047422398753159199, guid: eaffcf5b76aae7847ab98fd1ef1683bc, type: 3}
       propertyPath: m_SizeDelta.y
@@ -1162,7 +1207,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4047422399438831226, guid: eaffcf5b76aae7847ab98fd1ef1683bc, type: 3}
       propertyPath: m_RaycastTarget
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4047422399438831228, guid: eaffcf5b76aae7847ab98fd1ef1683bc, type: 3}
+      propertyPath: m_TagString
+      value: UI
       objectReference: {fileID: 0}
     - target: {fileID: 4111820436385098585, guid: eaffcf5b76aae7847ab98fd1ef1683bc, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1407,6 +1456,10 @@ PrefabInstance:
     - target: {fileID: 7906734157425188158, guid: eaffcf5b76aae7847ab98fd1ef1683bc, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 8609051770719147455, guid: eaffcf5b76aae7847ab98fd1ef1683bc, type: 3}
+      propertyPath: m_TagString
+      value: UI
       objectReference: {fileID: 0}
     - target: {fileID: 8695036972100099804, guid: eaffcf5b76aae7847ab98fd1ef1683bc, type: 3}
       propertyPath: m_AnchorMax.y

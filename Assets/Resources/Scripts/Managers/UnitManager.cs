@@ -68,6 +68,9 @@ public class UnitManager : MonoBehaviour
 
     private void _SelectUtil()
     {
+        if (Globals.SELECTED_UNITS.Contains(this)) return;
+        
+        EventManager.TriggerTypedEvent("SelectUnit", new CustomEventData(Unit));
         Globals.SELECTED_UNITS.Add(this);
         selectionCircle.SetActive(true);
         if (_healthbar == null)
@@ -81,8 +84,9 @@ public class UnitManager : MonoBehaviour
                 );
             h.Initialize(transform, boundingBox.height);
             h.SetPosition();
+            
         }
-        EventManager.TriggerTypedEvent("SelectUnit", new CustomEventData(Unit));
+        
     }
 
     protected virtual bool IsActive()

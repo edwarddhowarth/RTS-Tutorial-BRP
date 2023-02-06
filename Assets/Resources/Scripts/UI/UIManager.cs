@@ -209,6 +209,8 @@ public class UIManager : MonoBehaviour
     private void _OnSelectUnit(CustomEventData data)
     {
         _AddSelectedUnitToUIList(data.unit);
+        Debug.Log(data.unit.Code);
+        Debug.Log(Globals.SELECTED_UNITS.Count);
     }
 
     private void _OnDeselectUnit(CustomEventData data)

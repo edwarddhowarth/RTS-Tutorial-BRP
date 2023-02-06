@@ -21,7 +21,6 @@ public class BuildingManager : UnitManager
         set {_building =  value is Building ? (Building)value : null; }
     }
     
-    private BoxCollider _collider;
     private int _nCollisions = 0;
 
     public void Initialize(Building building)
