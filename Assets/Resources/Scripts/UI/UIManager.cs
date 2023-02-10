@@ -33,12 +33,22 @@ public class UIManager : MonoBehaviour
     private TextMeshProUGUI _infoPanelDescriptionText;
     private Transform _infoPanelResourcesCostParent;
     
-    //Selected Units Panel
+    //Selected Units List Panel
     public Transform selectedUnitsListParent;
     public GameObject selectedUnitsDisplayPrefab;
     
     //Control Group Panel
     public Transform selectionGroupsParent;
+    
+    //Selected Unit Control Panel
+    public GameObject selectedUnitMenu;
+    private RectTransform _selectedUnitContentRectTransform;
+    private RectTransform _selectedUnitButtonsRectTransform;
+    private TextMeshProUGUI _selectedUnitTitleText;
+    private TextMeshProUGUI _selectedUnitLevelText;
+    private Transform _selectedUnitResourcesProductionParent;
+    private Transform _selectedUnitActionButtonsParent;
+    
 
     private void Awake()
     {
@@ -84,6 +94,17 @@ public class UIManager : MonoBehaviour
         //Selection Group
         for (int i = 1; i <= 9; i++)
             ToggleSelectionGroupButton(i, false);
+        
+        //Controlled Unit Panel
+        Transform selectedUnitMenuTransform = selectedUnitMenu.transform;
+        _selectedUnitContentRectTransform = selectedUnitMenuTransform.Find("Content").GetComponent<RectTransform>();
+        _selectedUnitButtonsRectTransform = selectedUnitMenuTransform.Find("Buttons").GetComponent<RectTransform>();
+        _selectedUnitTitleText = selectedUnitMenuTransform.Find("Content/Title").GetComponent<TextMeshProUGUI>();
+        _selectedUnitLevelText = selectedUnitMenuTransform.Find("Content/Level").GetComponent<TextMeshProUGUI>();
+        _selectedUnitResourcesProductionParent = selectedUnitMenuTransform.Find("Content/ResourcesProduction");
+        _selectedUnitActionButtonsParent = selectedUnitMenuTransform.Find("Buttons/SpecificActions");
+
+        _ShowSelectedUnitMenu(false);
     }
 
     private void _AddBuildingButtonListener(Button b, int i)
@@ -209,13 +230,17 @@ public class UIManager : MonoBehaviour
     private void _OnSelectUnit(CustomEventData data)
     {
         _AddSelectedUnitToUIList(data.unit);
-        Debug.Log(data.unit.Code);
-        Debug.Log(Globals.SELECTED_UNITS.Count);
+        _SetSelectedUnitMenu(data.unit);
+        _ShowSelectedUnitMenu(true);
     }
 
     private void _OnDeselectUnit(CustomEventData data)
     {
         _RemoveSelectedUnitFromUIList(data.unit.Code);
+        if (Globals.SELECTED_UNITS.Count == 0)
+            _ShowSelectedUnitMenu(false);
+        else
+            _SetSelectedUnitMenu(Globals.SELECTED_UNITS[Globals.SELECTED_UNITS.Count - 1].Unit);
     }
 
     public void _AddSelectedUnitToUIList(Unit unit)
@@ -255,6 +280,40 @@ public class UIManager : MonoBehaviour
     public void ToggleSelectionGroupButton(int groupIndex, bool on)
     {
         selectionGroupsParent.Find(groupIndex.ToString()).gameObject.SetActive(on);
+    }
+    
+    //Controlled Unit Panel
+    private void _SetSelectedUnitMenu(Unit unit)
+    {
+        _selectedUnitTitleText.text = unit.Data.unitName;
+        _selectedUnitLevelText.text = $"Level {unit.Level}";
+        
+        foreach(Transform child in _selectedUnitResourcesProductionParent)
+            Destroy(child.gameObject);
+
+        //Shows icons if the unit/building adds resources to the player
+        if (unit.Production.Count > 0)
+        {
+            GameObject g;
+            Transform t;
+
+            foreach (ResourceValue resource in unit.Production)
+            {
+                Debug.Log("Adding Resources");
+                g = GameObject.Instantiate(gameResourceCostPrefab, _selectedUnitResourcesProductionParent);
+                t = g.transform;
+                t.Find("Text").GetComponent<TextMeshProUGUI>().text = $"+{resource.amount}";
+                t.Find("Icon").GetComponent<Image>().sprite =
+                    Resources.Load<Sprite>($"Textures/GameResources/{resource.code}");
+            }
+        }
+        else
+            Debug.Log("No Resources");
+    }   
+
+    private void _ShowSelectedUnitMenu(bool show)
+    {
+        selectedUnitMenu.SetActive(show);
     }
 
 }
