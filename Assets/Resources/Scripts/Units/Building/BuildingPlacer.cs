@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
  * 
  * GameObject: GAME
  * 
- * Used for placing buildings into the play area
+ * Manages the the player's MKB inputs for placing buildings
  */
 public class BuildingPlacer : MonoBehaviour
 {
@@ -78,8 +78,8 @@ public class BuildingPlacer : MonoBehaviour
         {
             _placedBuilding = null;
         }
-        EventManager.TriggerEvent("UpdateResourceTexts");
-        EventManager.TriggerEvent("CheckBuildingButtons");
+        EventManager.TriggerEvent(EventName.UpdateResourceTexts);
+        EventManager.TriggerEvent(EventName.CheckBuildingButtons);
     }
 
     void _CancelPlacedBuilding()

@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ * Base Class for Building and Characters that exist within the game world
+ */
+
 public class Unit
 {
 
@@ -73,6 +77,7 @@ public class Unit
 
     public void TriggerSkill(int index, GameObject target = null)
     {
+        Debug.Log("In Trigger Skill");
         _skillManagers[index].Trigger(target);
     }
 

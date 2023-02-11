@@ -5,7 +5,7 @@ using UnityEngine;
 /*
  * GameObject: Any Unit
  * 
- * Handles the player interaction elements of units
+ * Base class that handles the player interaction elements of units and derivatives
  */
 
 [RequireComponent(typeof(BoxCollider))]
@@ -54,7 +54,7 @@ public class UnitManager : MonoBehaviour
         selectionCircle.SetActive(false);
         Destroy(_healthbar);
         _healthbar = null;
-        EventManager.TriggerTypedEvent("DeselectUnit", new CustomEventData(Unit));
+        EventManager.TriggerEvent(EventName.DeselectUnit, Unit);
     }
 
     private void OnMouseDown()
@@ -70,7 +70,7 @@ public class UnitManager : MonoBehaviour
     {
         if (Globals.SELECTED_UNITS.Contains(this)) return;
         
-        EventManager.TriggerTypedEvent("SelectUnit", new CustomEventData(Unit));
+        EventManager.TriggerEvent(EventName.SelectUnit, Unit);
         Globals.SELECTED_UNITS.Add(this);
         selectionCircle.SetActive(true);
         if (_healthbar == null)

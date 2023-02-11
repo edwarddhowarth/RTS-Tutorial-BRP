@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ * Base data class for Units such as Buildings and Characters
+ */
 [CreateAssetMenu(fileName = "Unit", menuName = "Scriptable Objects/Unit", order = 1)]
 public class UnitData : ScriptableObject
 {

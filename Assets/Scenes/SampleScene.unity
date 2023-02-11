@@ -181,6 +181,7 @@ MonoBehaviour:
   selectedUnitsDisplayPrefab: {fileID: 396160590426772360, guid: 98eb8b65be4b1624faa53a1a28f6f97f, type: 3}
   selectionGroupsParent: {fileID: 1679597318}
   selectedUnitMenu: {fileID: 1566803840}
+  unitSkillButtonPrefab: {fileID: 1841920106953060282, guid: b989e257ce1e44f4eaa3b41976886f1f, type: 3}
 --- !u!114 &176024855
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -674,6 +675,37 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 35.83, y: 75, z: 0}
+--- !u!1 &817875452 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 35056026, guid: eaffcf5b76aae7847ab98fd1ef1683bc, type: 3}
+  m_PrefabInstance: {fileID: 1566803838}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &817875455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 817875452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30649d3a9faa99c48a7b1166b86bf2a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 2
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  m_ChildAlignment: 0
+  m_Spacing: 0
+  m_ChildForceExpandWidth: 1
+  m_ChildForceExpandHeight: 1
+  m_ChildControlWidth: 0
+  m_ChildControlHeight: 0
+  m_ChildScaleWidth: 0
+  m_ChildScaleHeight: 0
+  m_ReverseArrangement: 0
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -921,6 +953,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 35056027, guid: eaffcf5b76aae7847ab98fd1ef1683bc, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 35056027, guid: eaffcf5b76aae7847ab98fd1ef1683bc, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 35056027, guid: eaffcf5b76aae7847ab98fd1ef1683bc, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -50
+      objectReference: {fileID: 0}
     - target: {fileID: 426332788984036167, guid: eaffcf5b76aae7847ab98fd1ef1683bc, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

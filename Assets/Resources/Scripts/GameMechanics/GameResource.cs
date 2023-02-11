@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 
+/*
+ * Defines a resource used by the player to create units/buildings
+ */
 public class GameResource
 {
     private string _name;

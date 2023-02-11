@@ -28,6 +28,7 @@ public class UnitsSelection : MonoBehaviour
     
     private void Update()
     {
+        if (EventSystem.current.IsPointerOverGameObject()) return;
         MouseSelectionUpdate();
     }
 
@@ -126,20 +127,26 @@ public class UnitsSelection : MonoBehaviour
 
     public void SelectUnitsGroup(int groupIndex)
     {
-        _ReselectGroup(groupIndex);
+        //InputAction will trigger both select and create when only trying to do create with Shift + Num
+        //Now Select only works if Shift is not pressed
+        if(!Keyboard.current.ctrlKey.isPressed)
+            _ReselectGroup(groupIndex);
     }
 
     public void CreateSelectionGroup(int groupIndex)
     {
         //User clearing a control group by assign a group with no units selected
+        Debug.Log(Globals.SELECTED_UNITS.Count);
         if (Globals.SELECTED_UNITS.Count == 0)
         {
+            Debug.Log("Reset Group");
             //Reset group to empty
             if (_selectionGroups.ContainsKey(groupIndex))
                 _RemoveSelectionGroup(groupIndex);
             return;
         }
 
+        Debug.Log("Creating Group");
         //Add selected units to control group
         List<UnitManager> groupUnits = new List<UnitManager>(Globals.SELECTED_UNITS);
         _selectionGroups[groupIndex] = groupUnits;
@@ -155,6 +162,7 @@ public class UnitsSelection : MonoBehaviour
 
     private void _ReselectGroup(int groupIndex)
     {
+        Debug.Log("Selecting Group");
         //Selected group doesnt exist so do nothing
         if (!_selectionGroups.ContainsKey(groupIndex)) return;
         

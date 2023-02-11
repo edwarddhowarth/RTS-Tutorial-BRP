@@ -16,7 +16,6 @@ MonoBehaviour:
   unitName: Soldier
   description: Light Inf
   healthpoints: 30
-  prefab: {fileID: 0}
+  prefab: {fileID: 3257128061885811435, guid: b3d363f3be776df49a5dba2d64315145, type: 3}
   cost: []
-  skills:
-  - {fileID: 0}
+  skills: []

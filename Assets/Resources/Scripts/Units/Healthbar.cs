@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ * Placed on Healthbar prefab
+ */
 public class Healthbar : MonoBehaviour
 {
     public RectTransform rectTransform;

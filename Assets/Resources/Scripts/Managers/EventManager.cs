@@ -1,11 +1,31 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+/*
+ * EventName for each unique Trigger
+ * Event can pass generic object which must be casted on use
+ * Ensure Casts are correct and comment on listener methods of what they take in
+ */
+
+public enum EventName
+{
+    UpdateResourceTexts,
+    CheckBuildingButtons,
+    HoverBuildingButton,
+    UnhoverBuildingButton,
+    SelectUnit,
+    DeselectUnit,
+}
+
+[System.Serializable]
+public class TypedEvent: UnityEvent<object> {}
+
 public class EventManager : MonoBehaviour
 {
-    private Dictionary<string, CustomEvent> _typedEvents;
+    private Dictionary<string, TypedEvent> _typedEvents;
     private Dictionary<string, UnityEvent> _events;
     private static EventManager _eventManager;
 
@@ -31,15 +51,18 @@ public class EventManager : MonoBehaviour
         if(_events == null)
         {
             _events = new Dictionary<string, UnityEvent>();
-            _typedEvents = new Dictionary<string, CustomEvent>();
+            _typedEvents = new Dictionary<string, TypedEvent>();
         }
     }
 
 
-    public static void AddListener(string eventName, UnityAction listener)
+
+    
+    //Enum Test
+    public static void AddListener(EventName eventName, UnityAction listener)
     {
         UnityEvent evt = null;
-        if(instance._events.TryGetValue(eventName, out evt))
+        if(instance._events.TryGetValue(eventName.ToString(), out evt))
         {
             evt.AddListener(listener);
         }
@@ -47,54 +70,59 @@ public class EventManager : MonoBehaviour
         {
             evt = new UnityEvent();
             evt.AddListener(listener);
-            instance._events.Add(eventName, evt);
+            instance._events.Add(eventName.ToString(), evt);
         }
     }
-
-    public static void RemoveListener(string eventName, UnityAction unityAction)
+    
+    public static void AddListener(EventName eventName, UnityAction<object> listener)
     {
-        if (_eventManager == null) return;
-        UnityEvent evt = null;
-        if (instance._events.TryGetValue(eventName, out evt))
-            evt.Invoke();
-    }
-
-    public static void TriggerEvent(string eventName)
-    {
-        UnityEvent evt = null;
-        if (instance._events.TryGetValue(eventName, out evt))
-            evt.Invoke();
-    }
-
-
-    public static void AddTypedListener(string eventName, UnityAction<CustomEventData> listener)
-    {
-        CustomEvent evt = null;
-        if(instance._typedEvents.TryGetValue(eventName, out evt))
+        TypedEvent evt = null;
+        if(instance._typedEvents.TryGetValue(eventName.ToString(), out evt))
         {
             evt.AddListener(listener);
         }
         else
         {
-            evt = new CustomEvent();
+            evt = new TypedEvent();
             evt.AddListener(listener);
-            instance._typedEvents.Add(eventName, evt);
+            instance._typedEvents.Add(eventName.ToString(), evt);
         }
     }
 
-    public static void RemoveTypedListener(string eventName, UnityAction<CustomEventData> listener)
+    
+    //Enum Test
+    public static void RemoveListener(EventName eventName, UnityAction listener)
     {
         if (_eventManager == null) return;
-        CustomEvent evt = null;
-        if (instance._typedEvents.TryGetValue(eventName, out evt))
+        UnityEvent evt = null;
+        if (instance._events.TryGetValue(eventName.ToString(), out evt))
+            evt.RemoveListener(listener);
+    }
+    
+    public static void RemoveListener(EventName eventName, UnityAction<object> listener)
+    {
+        if (_eventManager == null) return;
+        TypedEvent evt = null;
+        if (instance._typedEvents.TryGetValue(eventName.ToString(), out evt))
             evt.RemoveListener(listener);
     }
 
-    public static void TriggerTypedEvent(string eventName, CustomEventData data)
+
+
+    //Enum Test
+    public static void TriggerEvent(EventName eventName)
     {
-        CustomEvent evt = null;
-        if (instance._typedEvents.TryGetValue(eventName, out evt))
+        UnityEvent evt = null;
+        if (instance._events.TryGetValue(eventName.ToString(), out evt))
+            evt.Invoke();
+    }
+    
+    public static void TriggerEvent(EventName eventName, object data)
+    {
+        TypedEvent evt = null;
+        if (instance._typedEvents.TryGetValue(eventName.ToString(), out evt))
             evt.Invoke(data);
     }
+
 
 }

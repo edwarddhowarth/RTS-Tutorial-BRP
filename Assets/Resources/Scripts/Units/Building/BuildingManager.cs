@@ -6,7 +6,7 @@ using UnityEngine;
  * 
  * GameObject: Any Building
  * 
- * Manages the placement of a building 
+ * Manages the validation of the placement for a building 
  * Inherits UnitManager's selection elements
  */
 

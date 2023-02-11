@@ -1,6 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 
+/*
+ * Defines a resource and a value required to create a unit
+ * Used in a list to determine the cost of a unit
+ */
 
 [System.Serializable]
 public class ResourceValue

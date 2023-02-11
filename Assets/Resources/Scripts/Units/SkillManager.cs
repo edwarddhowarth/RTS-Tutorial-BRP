@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/*
+ * Dynamically created when a skill is added to the skills list located on each Unit's scriptable object
+ * Each skill creates its own SkillManager
+ */
 public class SkillManager : MonoBehaviour
 {
     public SkillData skill;

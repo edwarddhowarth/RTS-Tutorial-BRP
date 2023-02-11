@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Unity.VisualScripting;
 
 /*
  * 
@@ -48,10 +49,14 @@ public class UIManager : MonoBehaviour
     private TextMeshProUGUI _selectedUnitLevelText;
     private Transform _selectedUnitResourcesProductionParent;
     private Transform _selectedUnitActionButtonsParent;
-    
+
+    private Unit _selectedUnit;
+    public GameObject unitSkillButtonPrefab;
+
 
     private void Awake()
     {
+
         _buildingPlacer = GetComponent<BuildingPlacer>();
 
         _resourceTexts = new Dictionary<string, TextMeshProUGUI>();
@@ -136,30 +141,31 @@ public class UIManager : MonoBehaviour
     //Events
     private void OnEnable()
     {
-        EventManager.AddListener("UpdateResourceTexts", _OnUpdateResourceTexts);
-        EventManager.AddListener("CheckBuildingButtons", _OnCheckBuildingButtons);
+        EventManager.AddListener(EventName.UpdateResourceTexts, _OnUpdateResourceTexts);
+        EventManager.AddListener(EventName.CheckBuildingButtons, _OnCheckBuildingButtons);
 
         //Info Panels
-        EventManager.AddTypedListener("HoverBuildingButton", _OnHoverBuildingButton);
-        EventManager.AddListener("UnhoverBuildingButton", _OnUnhoverBuildingButton);
+        EventManager.AddListener(EventName.HoverBuildingButton, _OnHoverBuildingButton);
+        EventManager.AddListener(EventName.UnhoverBuildingButton, _OnUnhoverBuildingButton);
+        
         
         //Selected Units Panel
-        EventManager.AddTypedListener("SelectUnit", _OnSelectUnit);
-        EventManager.AddTypedListener("DeselectUnit", _OnDeselectUnit);
+        EventManager.AddListener(EventName.SelectUnit, _OnSelectUnit);
+        EventManager.AddListener(EventName.DeselectUnit, _OnDeselectUnit);
     }
 
     private void OnDisable()
     {
-        EventManager.RemoveListener("UpdateResourceTexts", _OnUpdateResourceTexts);
-        EventManager.RemoveListener("CheckBuildingButtons", _OnCheckBuildingButtons);
+        EventManager.RemoveListener(EventName.UpdateResourceTexts, _OnUpdateResourceTexts);
+        EventManager.RemoveListener(EventName.CheckBuildingButtons, _OnCheckBuildingButtons);
 
         //Info Panels
-        EventManager.RemoveTypedListener("HoverBuildingButton", _OnHoverBuildingButton);
-        EventManager.RemoveListener("UnhoverBuildingButton", _OnUnhoverBuildingButton);
+        EventManager.RemoveListener(EventName.HoverBuildingButton, _OnHoverBuildingButton);
+        EventManager.RemoveListener(EventName.UnhoverBuildingButton, _OnUnhoverBuildingButton);
         
         //Selected Units Panel
-        EventManager.RemoveTypedListener("SelectUnit", _OnSelectUnit);
-        EventManager.RemoveTypedListener("DeselectUnit", _OnDeselectUnit);
+        EventManager.RemoveListener(EventName.SelectUnit, _OnSelectUnit);
+        EventManager.RemoveListener(EventName.DeselectUnit, _OnDeselectUnit);
     }
 
     private void _OnUpdateResourceTexts()
@@ -175,9 +181,9 @@ public class UIManager : MonoBehaviour
     }
 
     //Info Panel
-    private void _OnHoverBuildingButton(CustomEventData data)
+    private void _OnHoverBuildingButton(object data) //UnitData
     {
-        SetInfoPanel(data.unitData);
+        SetInfoPanel((UnitData)data);
         ShowInfoPanel(true);
     }
 
@@ -227,20 +233,22 @@ public class UIManager : MonoBehaviour
         infoPanel.SetActive(show);
     }
 
-    private void _OnSelectUnit(CustomEventData data)
+    private void _OnSelectUnit(object data) //Unit
     {
-        _AddSelectedUnitToUIList(data.unit);
-        _SetSelectedUnitMenu(data.unit);
+        _AddSelectedUnitToUIList((Unit)data);
+        _SetSelectedUnitMenu((Unit)data);
         _ShowSelectedUnitMenu(true);
+        
     }
 
-    private void _OnDeselectUnit(CustomEventData data)
+    private void _OnDeselectUnit(object data) //Unit
     {
-        _RemoveSelectedUnitFromUIList(data.unit.Code);
+        _RemoveSelectedUnitFromUIList(((Unit)data).Code);
         if (Globals.SELECTED_UNITS.Count == 0)
             _ShowSelectedUnitMenu(false);
         else
             _SetSelectedUnitMenu(Globals.SELECTED_UNITS[Globals.SELECTED_UNITS.Count - 1].Unit);
+        
     }
 
     public void _AddSelectedUnitToUIList(Unit unit)
@@ -285,6 +293,7 @@ public class UIManager : MonoBehaviour
     //Controlled Unit Panel
     private void _SetSelectedUnitMenu(Unit unit)
     {
+        _selectedUnit = unit;
         _selectedUnitTitleText.text = unit.Data.unitName;
         _selectedUnitLevelText.text = $"Level {unit.Level}";
         
@@ -299,7 +308,7 @@ public class UIManager : MonoBehaviour
 
             foreach (ResourceValue resource in unit.Production)
             {
-                Debug.Log("Adding Resources");
+                
                 g = GameObject.Instantiate(gameResourceCostPrefab, _selectedUnitResourcesProductionParent);
                 t = g.transform;
                 t.Find("Text").GetComponent<TextMeshProUGUI>().text = $"+{resource.amount}";
@@ -307,13 +316,37 @@ public class UIManager : MonoBehaviour
                     Resources.Load<Sprite>($"Textures/GameResources/{resource.code}");
             }
         }
-        else
-            Debug.Log("No Resources");
+        
+        foreach(Transform child in _selectedUnitActionButtonsParent)
+            Destroy(child.gameObject);
+
+        if (unit.SkillManagers.Count > 0)
+        {
+            GameObject g;
+            Transform t;
+            Button b;
+
+            for (int i = 0; i < unit.SkillManagers.Count; i++)
+            {
+                g = GameObject.Instantiate(unitSkillButtonPrefab, _selectedUnitActionButtonsParent);
+                t = g.transform;
+                b = g.GetComponent<Button>();
+                unit.SkillManagers[i].SetButton(b);
+                t.Find("Text").GetComponent<TextMeshProUGUI>().text = unit.SkillManagers[i].skill.skillName;
+                _AddUnitSkillButtonListener(b, i);
+            }
+        }
     }   
 
     private void _ShowSelectedUnitMenu(bool show)
     {
         selectedUnitMenu.SetActive(show);
+    }
+
+    //Adds a listener to the button that will call the TriggerSkill method
+    private void _AddUnitSkillButtonListener(Button b, int i)
+    {
+        b.onClick.AddListener(() => _selectedUnit.TriggerSkill(i));
     }
 
 }
