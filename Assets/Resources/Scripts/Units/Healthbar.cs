@@ -13,11 +13,21 @@ public class Healthbar : MonoBehaviour
     private Vector3 _lastTargetPosition;
     private Vector2 _pos;
     private float _yOffset;
+    private Transform _camera;
+    private Vector3 _lastCameraPosition;
 
+    private void Awake()
+    {
+        _camera = Camera.main.transform;
+    }
+    
     // Update is called once per frame
     void Update()
     {
-        if (!_target || _lastTargetPosition == _target.position)
+        if (
+            _lastCameraPosition == _camera.position &&
+            _target && _lastTargetPosition == _target.position
+        )
             return;
         SetPosition();
     }
@@ -35,5 +45,6 @@ public class Healthbar : MonoBehaviour
         _pos.y += _yOffset;
         rectTransform.anchoredPosition = _pos;
         _lastTargetPosition = _target.position;
+        _lastCameraPosition = _camera.position;
     }
 }
