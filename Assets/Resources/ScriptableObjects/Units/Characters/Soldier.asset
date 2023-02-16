@@ -19,3 +19,4 @@ MonoBehaviour:
   prefab: {fileID: 3257128061885811435, guid: b3d363f3be776df49a5dba2d64315145, type: 3}
   cost: []
   skills: []
+  fieldOfView: 50

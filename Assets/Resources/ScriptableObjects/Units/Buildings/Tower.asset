@@ -22,3 +22,5 @@ MonoBehaviour:
     amount: 50
   - code: wood
     amount: 200
+  skills: []
+  fieldOfView: 50

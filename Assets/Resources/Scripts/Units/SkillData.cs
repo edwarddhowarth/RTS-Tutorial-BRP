@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 /*
  * Seems like its better to make SkillData a class actual skills inherit from such that
@@ -39,9 +40,9 @@ public class SkillData : ScriptableObject
                 );
                 CharacterData d = (CharacterData)unitReference;
                 Character c = new Character(d);
-                c.Transform.position = instantiationPosition;
+                c.Transform.GetComponent<NavMeshAgent>().Warp(instantiationPosition);
                 c.Transform.GetComponent<CharacterManager>().Initialize(c);
-                
+                c.Transform.GetComponent<UnitManager>().EnableFOV();
             }
                 break;
             default:

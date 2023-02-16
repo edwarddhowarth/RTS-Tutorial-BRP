@@ -15,6 +15,7 @@ public class UnitData : ScriptableObject
     public GameObject prefab;
     public List<ResourceValue> cost;
     public List<SkillData> skills = new List<SkillData>();
+    public float fieldOfView;
 
     public bool CanBuy()
     {

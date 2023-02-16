@@ -76,10 +76,13 @@ public class BuildingPlacer : MonoBehaviour
         }
         else
         {
+            EventManager.TriggerEvent(EventName.PlaceBuildingOff);
             _placedBuilding = null;
         }
         EventManager.TriggerEvent(EventName.UpdateResourceTexts);
         EventManager.TriggerEvent(EventName.CheckBuildingButtons);
+        
+        Globals.UpdateNaveMeshSurface();
     }
 
     void _CancelPlacedBuilding()

@@ -17,6 +17,7 @@ public class UnitManager : MonoBehaviour
     private GameObject _healthbar;
     protected BoxCollider _collider;
     public virtual Unit Unit { get; set; }
+    public GameObject fov;
 
     private void Awake()
     {
@@ -98,6 +99,11 @@ public class UnitManager : MonoBehaviour
     {
         _collider = GetComponent<BoxCollider>();
         Unit = unit;
+    }
+
+    public void EnableFOV()
+    {
+        fov.SetActive(true);
     }
 
     

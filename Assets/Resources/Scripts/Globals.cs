@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.AI.Navigation;
 
 public class Globals
 {
@@ -18,4 +19,12 @@ public class Globals
 
     //Stores units that have been selected by the player
     public static List<UnitManager> SELECTED_UNITS = new List<UnitManager>();
+
+    public static NavMeshSurface NAV_MESH_SURFACE;
+    
+    public static void UpdateNaveMeshSurface()
+    {
+        NAV_MESH_SURFACE.UpdateNavMesh(NAV_MESH_SURFACE.navMeshData);
+    }
+
 }

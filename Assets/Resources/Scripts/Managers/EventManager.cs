@@ -18,6 +18,7 @@ public enum EventName
     UnhoverBuildingButton,
     SelectUnit,
     DeselectUnit,
+    PlaceBuildingOff
 }
 
 [System.Serializable]
